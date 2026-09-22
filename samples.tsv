@@ -1,0 +1,10 @@
+condition	sample	replicate	R1	R2
+ab-ex	D1-ab-ex	D1	D1-ab-ex.R1.fastq.gz	D1-ab-ex.R2.fastq.gz
+cntrl	D1-cntrl	D1	D1-cntrl.R1.fastq.gz	D1-cntrl.R2.fastq.gz
+dyna-ex	D1-dyna-ex	D1	D1-dyna-ex.R1.fastq.gz	D1-dyna-ex.R2.fastq.gz
+ab-ex	D2-ab-ex	D2	D2-ab-ex.R1.fastq.gz	D2-ab-ex.R2.fastq.gz
+cntrl	D2-cntrl	D2	D2-cntrl.R1.fastq.gz	D2-cntrl.R2.fastq.gz
+dyna-ex	D2-dyna-ex	D2	D2-dyna-ex.R1.fastq.gz	D2-dyna-ex.R2.fastq.gz
+ab-ex	D3-ab-ex	D3	D3-ab-ex.R1.fastq.gz	D3-ab-ex.R2.fastq.gz
+cntrl	D3-cntrl	D3	D3-cntrl.R1.fastq.gz	D3-cntrl.R2.fastq.gz
+dyna-ex	D3-dyna-ex	D3	D3-dyna-ex.R1.fastq.gz	D3-dyna-ex.R2.fastq.gz
