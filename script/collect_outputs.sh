@@ -3,25 +3,25 @@
 set -euo pipefail
 
 PROJECT="/work/rr151/Julia_Riley"
-
-SAMPLES=(
-    D1-ab-ex
-    D1-cntrl
-    D1-dyna-ex
-    D2-ab-ex
-    D2-cntrl
-    D2-dyna-ex
-    D3-ab-ex
-    D3-cntrl
-    D3-dyna-ex
-)
+SAMPLE_SHEET="$PROJECT/samples.tsv"
 
 mkdir -p "$PROJECT/results"
 
-for SAMPLE in "${SAMPLES[@]}"
+# Read samples.tsv
+# Expected columns:
+# condition  sample  replicate  R1  R2
+while IFS=$'\t' read -r CONDITION SAMPLE REPLICATE R1 R2
 do
+    # Skip header
+    [[ "$SAMPLE" == "sample" ]] && continue
+
+    # Skip empty lines
+    [[ -z "$SAMPLE" ]] && continue
+
     echo "========================================"
     echo "Collecting: $SAMPLE"
+    echo "Condition:  $CONDITION"
+    echo "Replicate:  $REPLICATE"
     echo "========================================"
 
     META="$PROJECT/runs/$SAMPLE/metadata.json"
@@ -29,6 +29,7 @@ do
 
     if [[ ! -f "$META" ]]; then
         echo "WARNING: no metadata.json for $SAMPLE"
+        echo "Skipping $SAMPLE"
         continue
     fi
 
@@ -64,11 +65,15 @@ do
         -type f \( -name "*.bw" -o -name "*.bigWig" \) \
         -exec cp -L {} "$OUT/signal/" \;
 
-    # Save metadata
+    # Save workflow metadata
     cp "$META" "$OUT/metadata.json"
 
-    echo "Finished $SAMPLE"
-done
+    echo "Finished: $SAMPLE"
+    echo
 
-echo
+done < "$SAMPLE_SHEET"
+
+echo "========================================"
 echo "All available outputs collected."
+echo "Results: $PROJECT/results"
+echo "========================================"
